@@ -1,14 +1,14 @@
 <template lang="">
        <div  class="portfolio-container">
-      <div v-for="(product,index) in products" :key="index">
+      <div v-for="(product,index) in portfolioProducts" :key="index">
         <div class="product">
             <div class="product-heading">
                 <span class="product-name">{{product.productName}}</span>
                 <span>(Price :{{product.price}}|Quantity :{{product.quantity}})</span>
             </div>
             <form class="product-add">
-                <input  v-model="product['quantity']" type="number" placeholder="Quantity">
-                <button @click.prevent="buyProduct(index)">Sell</button>
+                <input  v-model="product['sellQuantity']" type="number" placeholder="Quantity">
+                <button @click.prevent="sellProduct(index)">Sell</button>
             </form>
         </div>
       </div>  
@@ -16,12 +16,22 @@
 </template>
 <script>
 import store from '../store'
+import { mapGetters } from 'vuex'
 export default {
     data(){
         return {
             products : store.state.portfolio
         }
-    }
+    },
+    computed:{
+            ...mapGetters(['portfolioProducts'])
+    },
+    methods: {
+        sellProduct(index){
+             const product = this.products[index]
+    store.commit('sellProduct',product)
+        }
+    },
 }
 </script>
 <style lang="css">

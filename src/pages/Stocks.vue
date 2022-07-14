@@ -24,12 +24,8 @@ export default {
 },
 methods: {
   buyProduct(index){
-    console.log("index: ", index)
     const product = this.products[index]
-    const cost = this.products[index].quantity * this.products[index].price
-    console.log(cost);
     store.commit('addToPortfolio',product)
-    store.commit('payMent',cost)
   },
 }  
 }

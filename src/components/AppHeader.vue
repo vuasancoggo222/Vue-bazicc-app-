@@ -7,8 +7,8 @@
               <li><router-link :to="{name : 'stocks-route'}">Stocks</router-link></li>
         </ul>
           <ul>
-            <li>End Day</li>
-             <li>Save & Load</li>
+            <li><button @click.prevent="endDay()">End Day</button></li>
+             <li><button @click.prevent="saveData()">Save</button> & <button>Load</button></li>
               <li>Funds : {{yourFunds}}$</li>
         </ul>
     </nav>
@@ -16,10 +16,20 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import store from '../store';
 export default {
+    
     computed: {
-        ...mapGetters(['yourFunds'])
-    }
+        ...mapGetters(['yourFunds','productPrice'])
+    },
+    methods: {
+      endDay(){
+        store.commit('endDay')
+      },
+      saveData(){
+        store.commit('saveData')
+      }
+    },
 }
 </script>
 <style lang="css">
