@@ -15,22 +15,29 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import store from '../store'
 export default {
-    data(){
-   return{
-     products : store.state.stocks,
-   }
+  data(){
+    return{
+     
+    }
+  },
+computed:{
+...mapGetters(['products'])
 },
 methods: {
   buyProduct(index){
     const product = this.products[index]
-    store.commit('addToPortfolio',product)
+    const product2 = {...product}
+    console.log(product);
+    store.commit('addToPortfolio',product2)
+    this.$swal(store.getters.message)
   },
 }  
 }
 </script>
-<style lang="css">
+<style scoped>
    .portfolio-container {
         display: grid;
       grid-template-columns: 1fr 1fr;

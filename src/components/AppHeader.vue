@@ -8,7 +8,7 @@
         </ul>
           <ul>
             <li><button @click.prevent="endDay()">End Day</button></li>
-             <li><button @click.prevent="saveData()">Save</button> & <button>Load</button></li>
+             <li><button @click.prevent="saveData()">Save</button> & <button @click.prevent="loadData">Load</button></li>
               <li>Funds : {{yourFunds}}$</li>
         </ul>
     </nav>
@@ -28,6 +28,28 @@ export default {
       },
       saveData(){
         store.commit('saveData')
+            this.$swal(store.getters.message)
+      },
+      loadData(){
+        store.commit('loadData')
+        if(store.state.saveData.length < 1){
+this.$swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: store.getters.message,
+  showConfirmButton: false,
+  timer: 1000
+})
+        }
+else{
+  this.$swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: store.getters.message,
+  showConfirmButton: false,
+  timer: 1000
+})
+}
       }
     },
 }
@@ -56,5 +78,9 @@ export default {
   .logo{
     font-size: 22px;
     margin-left:0;
+  }
+  button{
+    border: none;
+    background: none;
   }
 </style>

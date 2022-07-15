@@ -9,7 +9,7 @@ const routes = [
         name : 'home-route'
     },
     {
-        path: '/porfolio',
+        path: '/portfolio',
         component : Portfolio,
         name : 'portfolio-route'
     },

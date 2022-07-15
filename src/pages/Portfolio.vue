@@ -1,10 +1,10 @@
-<template lang="">
+<template >
        <div  class="portfolio-container">
       <div v-for="(product,index) in portfolioProducts" :key="index">
         <div class="product">
             <div class="product-heading">
                 <span class="product-name">{{product.productName}}</span>
-                <span>(Price :{{product.price}}|Quantity :{{product.quantity}})</span>
+                <span>(Price :{{product.price}}|Quantity :{{product.productQuantity}})</span>
             </div>
             <form class="product-add">
                 <input  v-model="product['sellQuantity']" type="number" placeholder="Quantity">
@@ -30,11 +30,12 @@ export default {
         sellProduct(index){
              const product = this.products[index]
     store.commit('sellProduct',product)
+    this.$swal(store.getters.message)
         }
     },
 }
 </script>
-<style lang="css">
+<style scoped>
     .portfolio-container {
         display: grid;
       grid-template-columns: 1fr 1fr;
@@ -68,7 +69,7 @@ export default {
    .product-add button {
     padding : 5px 15px;
     font-size: 16px;
-    background-color: #04aa6d;
+    background-color: #fa8072 !important ;
     color: #fff;
     font-weight: bold;
     border: none;
